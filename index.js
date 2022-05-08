@@ -1,17 +1,16 @@
 // VARIABLES y CONSTANTES GLOBALES
-let index = 0;
 const IVA = 1.21;
-let totalVenta = 0;
+let total = 0;
 
 // CLASES
 class Articulo {
-  constructor(cod, desc, pre, porc, des) {
+  constructor(cod, nom, pre, porc, des, img) {
     this.codigo = cod;
-    this.descripcion = desc;
-    this.descuento = des;
+    this.nombre = nom;
     this.precio = pre;
     this.porcentaje = porc;
     this.descuento = des;
+    this.imagen = img;
   }
 }
 
@@ -22,22 +21,6 @@ class Venta {
     this.descuento = des;
     this.cantidad = can;
     this.subtotal = 0;
-    this.toString = function () {
-      return (
-        "- " +
-        this.descripcion +
-        " " +
-        "- Cantidad:" +
-        " " +
-        this.cantidad +
-        " - $" +
-        this.subtotal
-      );
-    };
-  }
-  calcSubtotal() {
-    this.subtotal =
-      (this.precio - this.precio * this.descuento) * IVA * this.cantidad;
   }
 }
 
@@ -46,97 +29,140 @@ const articulos = [];
 const ventas = [];
 
 // FUNCIONES
-//Función que permite validar el código entre 1 y 4
-function validarArt(codArt) {
-  while (codArt != "1" && codArt != "2" && codArt != "3" && codArt != "4") {
-    codArt = prompt(
-      "Código Erroneo, Reeingrese Código de Artículo: \n (1) Sandwich (2) Picada (3) Pizza (4) Salir"
-    );
+// Las tres siguientes funciones son en respuesta de los click en "cargar" de cada uno de los productos
+
+function respuestaClickSandwich() {
+  let cantidad = document.getElementsByClassName("cantidad")[0].value;
+  //Carga el array de ventas
+  ventas.push(
+    new Venta(
+      articulos[0].nombre,
+      articulos[0].precio,
+      articulos[0].descuento,
+      cantidad
+    )
+  );
+
+  res =
+    (articulos[0].precio - articulos[0].precio * articulos[0].descuento) *
+    IVA *
+    cantidad;
+  ventas[0].subtotal = res;
+  subtotal[0].innerHTML = "Subtotal: $" + res;
+  console.log(ventas[0].subtotal);
+}
+function respuestaClickPicada() {
+  let cantidad = document.getElementsByClassName("cantidad")[1].value;
+  //Carga el array de ventas
+  ventas.push(
+    new Venta(
+      articulos[1].nombre,
+      articulos[1].precio,
+      articulos[1].descuento,
+      cantidad
+    )
+  );
+
+  res =
+    (articulos[1].precio - articulos[1].precio * articulos[1].descuento) *
+    IVA *
+    cantidad;
+  ventas[1].subtotal = res;
+  subtotal[1].innerHTML = "Subtotal: $" + res;
+  console.log(ventas[1].subtotal);
+}
+
+function respuestaClickPizza() {
+  let cantidad = document.getElementsByClassName("cantidad")[2].value;
+  //Carga el array de ventas
+  ventas.push(
+    new Venta(
+      articulos[2].nombre,
+      articulos[2].precio,
+      articulos[2].descuento,
+      cantidad
+    )
+  );
+
+  res =
+    (articulos[2].precio - articulos[2].precio * articulos[2].descuento) *
+    IVA *
+    cantidad;
+  ventas[2].subtotal = res;
+  subtotal[2].innerHTML = "Subtotal: $" + res;
+  console.log(ventas[2].subtotal);
+}
+
+//MUESTRA LA VENTA REALIZADA
+function respuestaFinalizarVenta() {
+  // Acumula el total
+  total = ventas.reduce((acum, elem) => acum + elem.subtotal, 0);
+
+  //Mientras el total sea >0 (Exista una compra) muestra la venta
+  if (total > 0) {
+    let tituloVent = document.createElement("h3");
+    tituloVent.innerHTML =
+      "------------------ Su Compra: -----------------------";
+    document.body.append(tituloVent);
+
+    // Muestra el array con las venta efectuada
+    for (const venta of ventas) {
+      let contVenta = document.createElement("div");
+      contVenta.innerHTML = `<h4>${venta.descripcion}</h4>
+  <p>Cantidad: ${venta.cantidad}</p>
+  <p>Subtotal: $${venta.subtotal}</p>`;
+      document.body.appendChild(contVenta);
+    }
+
+    //Muestra el total de la venta
+    let totalFinal = document.createElement("h4");
+    totalFinal.innerHTML = `Total Compra: $${total}`;
+    document.body.append(totalFinal);
   }
-  return codArt;
 }
 
 //SCRIPT PRINCIPAL
 //Carga de los artículos en el array artículos
-articulos.push(new Articulo("1", "Sandwich por Docena", 900, "10%", 0.1));
-articulos.push(new Articulo("2", "Bandeja de Super Picada", 1000, "15%", 0.15));
-articulos.push(new Articulo("3", "Pizza Lista Completa", 1100, "20%", 0.2));
-
-let codigo = prompt(
-  "Ingrese Código de Artículo: \n(1) Sandwich (2) Picada (3) Pizza (4) Salir"
+articulos.push(
+  new Articulo("1", "Sandwich por Docena", 900, "10%", 0.1, "img/img1.jpg")
+);
+articulos.push(
+  new Articulo(
+    "2",
+    "Bandeja de Super Picada",
+    1000,
+    "15%",
+    0.15,
+    "img/img2.jpg"
+  )
+);
+articulos.push(
+  new Articulo("3", "Pizza Lista Completa", 1100, "20%", 0.2, "img/img3.jpg")
 );
 
-//Valida el código (entre 1 y 4)
-codigo = validarArt(codigo);
-
-// Busca en el array los artículos correspondientes a los códigos ingresados hasta que se ingresa 4
-while (codigo != 4) {
-  const filtrado = articulos.find((elemento) => elemento.codigo === codigo);
-  let cantidad = prompt(
-    "ARTÍCULO:" +
-      " " +
-      filtrado.descripcion +
-      " " +
-      "Precio: $" +
-      filtrado.precio +
-      " " +
-      "Descuento: " +
-      filtrado.porcentaje +
-      "\nIngrese Cantidad:"
-  );
-  //Carga el array de ventas
-  ventas.push(
-    new Venta(
-      filtrado.descripcion,
-      filtrado.precio,
-      filtrado.descuento,
-      cantidad
-    )
-  );
-  ventas[index].calcSubtotal();
-  // Acumula el total
-  const total = ventas.reduce((acum, elem) => acum + elem.subtotal, 0);
-
-  // Muestra el array de ventas
-  codigo = prompt(
-    "Su compra: \n" +
-      ventas.join("\n") +
-      "\nTotal c/IVA ------------: $" +
-      total +
-      "\nIngrese Código de Artículo: | (1) Sandwich (2) Picada (3) Pizza (4) Salir"
-  );
-
-  // Guarda el total en una variable global para luego mostrarlo en el html
-  totalVenta = total;
-  //Valida el nuevo código para reingresar al ciclo
-  codigo = validarArt(codigo);
-  // Incrementa el indice del vector de ventas para la próxima iteracion
-  index = index + 1;
+// Mostrar los artículos del array en el DOM
+for (const articulo of articulos) {
+  let contArticulo = document.createElement("div");
+  contArticulo.innerHTML = `<img src=${articulo.imagen} />' <h3>${articulo.nombre}</h3><b>$${articulo.precio} - </b><b>Dto: ${articulo.porcentaje} - </b><input class="cantidad" type="number" placeholder="cantidad" size="4"><input type="button" value="Agregar" class="agregar"><h4 class="subtotal"></h4><p>---------------------------------------------------------------------</p>`;
+  document.body.appendChild(contArticulo);
 }
 
-// MOSTRAR DATOS DE LA VENTA POR HTML
-// Controla que se haya efectuado una venta
-if (totalVenta > 0) {
-  let tituloVent = document.createElement("h3");
-  tituloVent.innerHTML = "---- Confirmar Compra ----";
-  document.body.append(tituloVent);
+// Agrega un botón para que el usuario pueda confirmar la venta
+let btnFinalizarVenta = document.createElement("button");
+btnFinalizarVenta.innerHTML = `Finalizar Compra`;
+document.body.append(btnFinalizarVenta);
 
-  // Muestra el array con las venta efectuada
-  for (const venta of ventas) {
-    let contVenta = document.createElement("div");
-    contVenta.innerHTML = `<h4>${venta.descripcion}</h4>
-  <p>Cantidad: ${venta.cantidad}</p>
-  <p>Subtotal: $${venta.subtotal}</p>`;
-    document.body.appendChild(contVenta);
-  }
+let subtotal = document.getElementsByClassName("subtotal");
 
-  //Calcula el total de la venta y lo muestra
-  let totalFinal = document.createElement("h4");
-  totalFinal.innerHTML = `Total Compra: $${totalVenta}`;
-  document.body.append(totalFinal);
+// Toma los click de los botones que se realicen en cada producto para agregar los mismos
+let btnArgregar = document.getElementsByClassName("agregar");
 
-  // Agrega un botón para que el usuario pueda confirmar la venta para agregar la acción cuando veamos eventos
-  let confirmar = document.createElement("button");
-  confirmar.innerHTML = `Confirmar`;
-  document.body.append(confirmar);
-}
+btnArgregar[0].addEventListener("click", respuestaClickSandwich);
+
+btnArgregar[1].addEventListener("click", respuestaClickPicada);
+
+btnArgregar[2].addEventListener("click", respuestaClickPizza);
+
+// Toma el click del boton finalizar para mostrar los datos de la venta realizada
+btnFinalizarVenta = document.getElementsByTagName("button");
+btnFinalizarVenta[0].addEventListener("click", respuestaFinalizarVenta);
