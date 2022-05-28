@@ -1,0 +1,26 @@
+[
+  {
+    "codigo": "0",
+    "nombre": "Sandwich Docena",
+    "precio": 900,
+    "porcentaje": "10%",
+    "descuento": 0.1,
+    "imagen": "img/img1.jpg"
+  },
+  {
+    "codigo": "1",
+    "nombre": "Bandeja de Picada",
+    "precio": 1000,
+    "porcentaje": "15%",
+    "descuento": 0.15,
+    "imagen": "img/img2.jpg"
+  },
+  {
+    "codigo": "2",
+    "nombre": "Pizza Completa",
+    "precio": 1100,
+    "porcentaje": "20%",
+    "descuento": 0.2,
+    "imagen": "img/img3.jpg"
+  }
+]

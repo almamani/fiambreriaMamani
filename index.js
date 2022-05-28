@@ -1,19 +1,8 @@
 // DECLARACIONES
 const IVA = 1.21;
-
+let articulos;
 const contenedorArt = document.getElementById("articulos");
 const tablaCompras = document.getElementById("tablaCompras");
-
-class Articulo {
-  constructor(cod, nom, pre, porc, des, img) {
-    this.codigo = cod;
-    this.nombre = nom;
-    this.precio = pre;
-    this.porcentaje = porc;
-    this.descuento = des;
-    this.imagen = img;
-  }
-}
 
 class Compra {
   constructor(nom, pre, des, can, img) {
@@ -30,21 +19,20 @@ class Compra {
   }
 }
 
-const articulos = [];
 const compras = [];
 
 //FUNCIONES
 //--- Generación de cada artículo apartir de los artículos del storage para luego agregarlos al DOM
-const crearArticulo = ({ imagen, nombre, precio, porcentaje, codigo }) => {
+const crearArticulo = (item) => {
   return `
 <div class="card" style="width: 18rem;">
-  <img src="${imagen}" class="card-img-top" alt="${nombre}">
+  <img src="${item.imagen}" class="card-img-top" alt="${item.nombre}">
   <div class="card-body">
-    <h4 class="card-title">${nombre}</h4>
-    <p class="card-text">Precio: $${precio}</p>
-    <p class="card-text">Descuento: ${porcentaje}</p>
+    <h4 class="card-title">${item.nombre}</h4>
+    <p class="card-text">Precio: $${item.precio}</p>
+    <p class="card-text">Descuento: ${item.porcentaje}</p>
     <b>Cantidad: <input type="number" class="cantidad w-25" min="0"/></b>
-     <a href="#" onclick="agregarCarrito(${codigo})"  class="btn btn-primary">Agregar</a><p><h5 class="subtotal"></h5></p>
+     <a href="#" onclick="agregarCarrito(${item.codigo})"  class="btn btn-primary">Agregar</a><p><h5 class="subtotal"></h5></p>
   </div>
 </div>
 `;
@@ -69,6 +57,7 @@ const agregarArticulos = (datos, nodo) => {
     acumulador += crearArticulo(el);
   });
   nodo.innerHTML = acumulador;
+
   mensajePromocion();
 };
 
@@ -93,7 +82,6 @@ const agregarCompras = (datos, nodo) => {
 
 const generarCompra = (id, cantidad) => {
   const filtrado = articulos.find((item) => item.codigo == id);
-
   compras.push(
     new Compra(
       filtrado.nombre,
@@ -134,27 +122,23 @@ const mensajePromocion = () => {
   }).showToast();
 };
 
-//SCRIPT PRINCIPAL
-//--- Carga de los artículos en el array artículos y luego en el storage
-articulos.push(
-  new Articulo("0", "Sandwich Docena", 900, "10%", 0.1, "img/img1.jpg")
-);
-articulos.push(
-  new Articulo("1", "Bandeja de Picada", 1000, "15%", 0.15, "img/img2.jpg")
-);
-articulos.push(
-  new Articulo("2", "Pizza Completa", 1100, "20%", 0.2, "img/img3.jpg")
-);
-
-localStorage.setItem("articulosStorage", JSON.stringify(articulos));
-
-//--- Carga  de los artículos en el Dom a partir del Storage
-const storageArticulos = JSON.parse(localStorage.getItem("articulosStorage"));
-agregarArticulos(storageArticulos, contenedorArt);
+//SCRIPTS PRINCIPALES
+//--- Carga los artículos del json en el Dom y en el vector de Artículos
+document.addEventListener("DOMContentLoaded", () => {
+  fetchDatos();
+});
+const fetchDatos = async () => {
+  const respuesta = await fetch("data.json");
+  const datos = await respuesta.json();
+  agregarArticulos(datos, contenedorArt);
+  articulos = datos.slice();
+  console.log(articulos);
+};
 
 //--- Carga las compras al array de compras, en caso de que la cantidad sea = 0 o un campo vacío muestra un mensaje de error
 const agregarCarrito = (id) => {
   let cantidad = document.getElementsByClassName("cantidad")[id].value;
+
   (cantidad == "0" || cantidad == "") > 0
     ? mensajeFaltaCantidad()
     : generarCompra(id, cantidad);
