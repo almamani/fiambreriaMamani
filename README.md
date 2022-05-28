@@ -19,3 +19,5 @@ Corresponde al Desafío Clase 12 Operadores Avanzados de Javascript / Coderhouse
 # Sexta Version:
 Corresponde al Desafío Clase 13 Librerias de Javascript / Coderhouse
 
+# Septima Version:
+Corresponde al Desafío Clase 15 Ajax-Fetch Javascript / Coderhouse
