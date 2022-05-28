@@ -12,3 +12,10 @@ Corresponde al Desafío Clase 9 Eventos de Javascript / Coderhouse
 
 # Cuarta Version:
 Corresponde a la Segunda Pre Entrega del proyecto de Javascript / Coderhouse
+
+# Quinta Version:
+Corresponde al Desafío Clase 12 Operadores Avanzados de Javascript / Coderhouse
+
+# Sexta Version:
+Corresponde al Desafío Clase 13 Librerias de Javascript / Coderhouse
+
