@@ -1,80 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-  <link rel="stylesheet" href="style.css">
+
+
+  <link rel="stylesheet" href="./css/style.css">
   <title>Tu Fiambreria</title>
 </head>
 
 <body>
-  <!--------------  MENÚ -------------->
-  <nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <h1>Tu Fiambrería</h1>
-      </a>
+  <header class="header">
+    <!-- Header Logo + Icono Carrito -->
+    <div class="container">
+      <div class="row">
+        <div class="four columns">
+          <h1><img src="img/logo_gran_monarca1.png" alt="logo Tu Fiambreria">Fiambreria</h1>
+        </div>
+        <div class="two-columns u-pull-right">
+          <ul>
+            <li class="submenu">
+              <img src="img/img_carrito.png" alt="carrito">
+              <!-- Carrito -->
+              <div id="carrito">
+                <table class="u-full-width">
+                  <thead>
+                    <tr>
+                      <th>Articulos</th>
+                      <th> </th>
+                      <th>Cantidad</th>
+                      <th> </th>
+                      <th>Subtotal</th>
+                      <th> </th>
+                    </tr>
+
+                  </thead>
+                  <tbody id="contenedor-carrito">
+                    <!-- Templates de Articulos agregados al carrito -->
+
+                  </tbody>
+
+                </table>
+                <div id="contenedor-total">
+                  Carrito Vacío - Comience su Compra
+                </div>
+              </div>
+        </div>
+        </li>
+        </ul>
+      </div>
     </div>
 
-  </nav>
-  <!----------- LISTADO ARTICULOS -------->
-  <div class="container">
-    <div id="articulos" class="d-flex row flex-wrap mt-5 justify-content-center">
+  </header>
 
-    </div>
-  </div>
-  <!-------------- MOSTRAR COMPRA -------------->
-
-  <!-- Boton Finalizar Compra -->
-  <div class="container  text-center mt-5">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      Finalizar Compra
-    </button>
-  </div>
-  <!-- Ventana Datos de la Compra -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="exampleModalLabel" id="exampleModalLabel">Su Compra</h5>
-
-        </div>
-        <div class="modal-body">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Cantidad</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Subtotal</th>
-                <th scope="col">Imagen</th>
-              </tr>
-
-            </thead>
-            <tbody id="tablaCompras">
-            </tbody>
-          </table>
-        </div>
-        <div id="total" class="fw-bold text-center"></div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-            onclick="location.reload()">Close</button>
-
+  <!-- Hero Image -->
+  <div class="hero">
+    <div class="container">
+      <div class="row">
+        <div class="six columns">
+          <div class="contenido-hero">
+            <!-- Hero Image de Fondo -->
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-    crossorigin="anonymous"></script>
+  <!-- Barra Info -->
+  <div class="barra">
+    <div class="container">
+      <div class="row">
+        <div class="four columns icono icono1">
+          <p>Sandwichs de Miga<br>
+            Pan y Fiambres de Primera con los mejores aderezos</p>
+        </div>
+        <div class="four columns icono icono2">
+          <p>Picadas Especiales<br>
+            Con los mejores ingredientes, jamón, queso, salame, aceitunas</p>
+        </div>
+        <div class="four columns icono icono3">
+          <p>Pizzas Listas<br>
+            Masa artesanal, salsas caseras, 20 minutos de horno y a disfrutar</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenedor de Artículos -->
+  <div class="lista-articulos container">
+    <h2>Hacé tu Pedido</h2>
+    <div class="row" id="contenedor-articulos">
+      <!-- Templates de Articulos a la venta -->
+    </div>
+  </div>
+
+  <!-- Pié de Página -->
+  <footer>
+    <h3>Tu Fiambreria - 2022</h3>
+  </footer>
+
+  <!-- Template articulos a la venta -->
+  <template id="template-articulos">
+    <div class="card">
+      <img src="img/001_sanwich_jamon_queso.jpg" class="imagen-articulo u-full-width" alt="sanwich Jamon Queso">
+      <div class="info-card">
+        <h4>Miga Jamón y Queso</h4>
+        <p class="precio">$<span>5000</span></p>
+        <button class="button-card">Agregar al Carrito</button>
+      </div>
+    </div>
+  </template>
+  <!-- Template articulos del carrito -->
+  <template id="template-articulos-carrito">
+    <tr class="card-carrito">
+      <td class="nombre">Nombre</td>
+      <td><button class="button-agregar">+</button></td>
+      <td class="cantidad">2</td>
+      <td><button class="button-quitar">-</button></td>
+      <td class="subtotal">$<span>10000</span></td>
+      <td><button class="button-eliminar">x</button></td>
+    </tr>
+  </template>
+  <!-- Template Total / Limpiar Carrito -->
+  <template id="template-total">
+    <div class="total-card">
+      <button class="button-limpiar">Limpiar Carrito</button>
+      <p class="total">Total: $<span>5000</span></p>
+    </div>
+    <button class="button-finalizar">Finalizar Compra</button>
+  </template>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-  <script src="./index.js"></script>
+  <script src="./js/index.js"></script>
 </body>
 
 </html>

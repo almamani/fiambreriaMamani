@@ -1,0 +1,56 @@
+[
+  {
+    "codigo": "1",
+    "nombre": "Miga Jamon y Queso x Doc.",
+    "precio": 1000,
+    "imagen": "img/001_sanwich_jamon_queso.jpg"
+  },
+  {
+    "codigo": "2",
+    "nombre": "Miga de Ternera x Doc.",
+    "precio": 1100,
+    "imagen": "img/002_sanwich_ternera.jpg"
+  },
+  {
+    "codigo": "3",
+    "nombre": "Miga Vegetariano x Doc.",
+    "precio": 1200,
+    "imagen": "img/003_sanwich_vegetariano.jpg"
+  },
+  {
+    "codigo": "4",
+    "nombre": "Picada p/4 Personas",
+    "precio": 2100,
+    "imagen": "img/004_picada_4_personas.jpg"
+  },
+  {
+    "codigo": "5",
+    "nombre": "Picada p/6 Personas",
+    "precio": 2550,
+    "imagen": "img/005_picada_6_personas.jpg"
+  },
+  {
+    "codigo": "6",
+    "nombre": "Picada p/12 Personas",
+    "precio": 3100,
+    "imagen": "img/006_picada_12_personas.jpg"
+  },
+  {
+    "codigo": "7",
+    "nombre": "Pizza Muzzarella",
+    "precio": 600,
+    "imagen": "img/007_pizza_muzarella.jpg"
+  },
+  {
+    "codigo": "8",
+    "nombre": "Pizza Napolitana",
+    "precio": 850,
+    "imagen": "img/008_pizza_napolitana.jpg"
+  },
+  {
+    "codigo": "9",
+    "nombre": "Pizza Palmitos",
+    "precio": 1000,
+    "imagen": "img/009_pizza_palmitos.jpg"
+  }
+]
